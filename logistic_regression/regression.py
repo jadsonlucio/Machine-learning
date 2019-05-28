@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('TkAgg')
+
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
@@ -62,9 +65,9 @@ class LogisticRegression():
     def plot_train_test_results(self, metric = "loss"):
         if self.trained:
             if metric in  self.metrics:
-                plt.plot(self.result_metrics[metric]["train"], legend = "train")
-                plt.plot(self.result_metrics[metric]["test"], legend = "test")
-
+                plt.plot(self.result_metrics[metric]["train"], label = "train")
+                plt.plot(self.result_metrics[metric]["test"], label = "test")
+                plt.legend()
                 plt.show()
             
             else:
