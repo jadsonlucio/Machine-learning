@@ -1,0 +1,480 @@
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="http://gmpg.org/xfn/11" rel="profile"/>
+<link href="http://deeplearningbook.com.br/xmlrpc.php" rel="pingback"/>
+<title>Capítulo 45 - Reconhecimento de Imagens com Redes Neurais Convolucionais em Python – Parte 2 - Deep Learning Book</title>
+<!-- This site is optimized with the Yoast SEO plugin v11.2.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta content="Vamos iniciar nosso trabalho de Reconhecimento de Imagens com Redes Neurais Convolucionais em Python cuidando da nossa matéria-prima: dados." name="description">
+<link href="http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/" rel="canonical">
+<meta content="pt_BR" property="og:locale">
+<meta content="article" property="og:type"/>
+<meta content="Capítulo 45 - Reconhecimento de Imagens com Redes Neurais Convolucionais em Python – Parte 2 - Deep Learning Book" property="og:title"/>
+<meta content="Vamos iniciar nosso trabalho de Reconhecimento de Imagens com Redes Neurais Convolucionais em Python cuidando da nossa matéria-prima: dados." property="og:description"/>
+<meta content="http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/" property="og:url"/>
+<meta content="Deep Learning Book" property="og:site_name"/>
+<meta content="Reconhecimento de Imagens" property="article:tag"/>
+<meta content="Rede Neural Convolucional" property="article:tag"/>
+<meta content="Livro Online" property="article:section"/>
+<meta content="2019-05-17T17:27:16+00:00" property="article:published_time"/>
+<meta content="2019-05-17T17:40:42+00:00" property="article:modified_time"/>
+<meta content="2019-05-17T17:40:42+00:00" property="og:updated_time"/>
+<meta content="https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?fit=780%2C360" property="og:image"/>
+<meta content="https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?fit=780%2C360" property="og:image:secure_url"/>
+<meta content="780" property="og:image:width"/>
+<meta content="360" property="og:image:height"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Vamos iniciar nosso trabalho de Reconhecimento de Imagens com Redes Neurais Convolucionais em Python cuidando da nossa matéria-prima: dados." name="twitter:description"/>
+<meta content="Capítulo 45 - Reconhecimento de Imagens com Redes Neurais Convolucionais em Python – Parte 2 - Deep Learning Book" name="twitter:title"/>
+<meta content="https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?fit=780%2C360" name="twitter:image"/>
+<script class="yoast-schema-graph yoast-schema-graph--main" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"http://deeplearningbook.com.br/#organization","name":"","url":"http://deeplearningbook.com.br/","sameAs":[]},{"@type":"WebSite","@id":"http://deeplearningbook.com.br/#website","url":"http://deeplearningbook.com.br/","name":"Deep Learning Book","publisher":{"@id":"http://deeplearningbook.com.br/#organization"},"potentialAction":{"@type":"SearchAction","target":"http://deeplearningbook.com.br/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/#webpage","url":"http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/","inLanguage":"pt-BR","name":"Cap\u00edtulo 45 - Reconhecimento de Imagens com Redes Neurais Convolucionais em Python \u2013 Parte 2 - Deep Learning Book","isPartOf":{"@id":"http://deeplearningbook.com.br/#website"},"image":{"@type":"ImageObject","@id":"http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/#primaryimage","url":"https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?fit=780%2C360","width":780,"height":360,"caption":"Deep Learning Book"},"primaryImageOfPage":{"@id":"http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/#primaryimage"},"datePublished":"2019-05-17T17:27:16+00:00","dateModified":"2019-05-17T17:40:42+00:00","description":"Vamos iniciar nosso trabalho de Reconhecimento de Imagens com Redes Neurais Convolucionais em Python cuidando da nossa mat\u00e9ria-prima: dados."},{"@type":"Article","@id":"http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/#article","isPartOf":{"@id":"http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/#webpage"},"author":{"@id":"http://deeplearningbook.com.br/author/ds1admin/#author","name":"Equipe DSA"},"publisher":{"@id":"http://deeplearningbook.com.br/#organization"},"headline":"Cap\u00edtulo 45 &#8211; Reconhecimento de Imagens com Redes Neurais Convolucionais em Python \u2013 Parte 2","datePublished":"2019-05-17T17:27:16+00:00","dateModified":"2019-05-17T17:40:42+00:00","commentCount":0,"mainEntityOfPage":"http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/#webpage","image":{"@id":"http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/#primaryimage"},"keywords":"Reconhecimento de Imagens,Rede Neural Convolucional","articleSection":"Livro Online"},{"@type":"Person","@id":"http://deeplearningbook.com.br/author/ds1admin/#author","name":"Equipe DSA","image":{"@type":"ImageObject","@id":"http://deeplearningbook.com.br/#personlogo","url":"http://1.gravatar.com/avatar/78e26acddbcf8f482f38b5a8ff687fbd?s=96&d=mm&r=g","caption":"Equipe DSA"},"sameAs":[]}]}</script>
+<!-- / Yoast SEO plugin. -->
+<link href="//s0.wp.com" rel="dns-prefetch">
+<link href="//fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="//s.w.org" rel="dns-prefetch"/>
+<link href="http://deeplearningbook.com.br/feed/" rel="alternate" title="Feed para Deep Learning Book »" type="application/rss+xml"/>
+<!-- This site uses the Google Analytics by MonsterInsights plugin v7.6.0 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+<script data-cfasync="false" type="text/javascript">
+	var mi_version         = '7.6.0';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-78244416-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-78244416-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/deeplearningbook.com.br\/wp-includes\/js\/wp-emoji-release.min.js?ver=d5f7d703b095c6af6d0c6020c5e6b8a2"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link href="http://deeplearningbook.com.br/wp-content/themes/talon/css/bootstrap/bootstrap.min.css?ver=1" id="bootstrap-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="http://deeplearningbook.com.br/wp-includes/css/dist/block-library/style.min.css?ver=d5f7d703b095c6af6d0c6020c5e6b8a2" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="http://deeplearningbook.com.br/wp-content/themes/talon/style.css?ver=d5f7d703b095c6af6d0c6020c5e6b8a2" id="talon-style-css" media="all" rel="stylesheet" type="text/css"/>
+<style id="talon-style-inline-css" type="text/css">
+.inner-bar,.lists-box ul li:before,.testimonials-box .slick-dots li.slick-active button::before,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,.woocommerce #respond input#submit:hover,.woocommerce a.button:hover,.woocommerce button.button:hover,.woocommerce input.button:hover,.woocommerce input.button.alt:hover,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,.woocommerce #respond input#submit,.woocommerce a.button,.woocommerce button.button,.woocommerce input.button,.woocommerce input.button.alt,.woocommerce span.onsale,.woocommerce ul.products li.product .onsale,.check-box-active .checkbox-inner,.tags-links a:hover,.button,button,input[type="button"],input[type="reset"],input[type="submit"],.woocommerce button.single_add_to_cart_button.button,.button:hover,button:hover,input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover,.woocommerce button.single_add_to_cart_button.button:hover	{ background-color:#7261ee;}
+.team-social a:hover,.portfolio-item h4 a:hover,.woocommerce-message:before { color:#7261ee;}
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active,.portfolio-filter ul .active a,.woocommerce-message { border-color:#7261ee;}
+.button:hover, button:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, .woocommerce button.single_add_to_cart_button.button:hover,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,.woocommerce #respond input#submit:hover,.woocommerce a.button:hover,.woocommerce button.button:hover,.woocommerce input.button:hover,.woocommerce input.button.alt:hover 
+					{ -webkit-box-shadow: 0px 0px 40px 0px rgba(114,97,238,0.54);
+					  -moz-box-shadow:  0px 0px 40px 0px rgba(114,97,238,0.54);
+					  box-shadow: 0px 0px 40px 0px rgba(114,97,238,0.54);}
+.site-title a,.site-title a:hover { color:#2d3142;}
+.site-description { color:#515d77;}
+.site-header { background-color:#ffffff;}
+.main-navigation li a { color:#4f5d75;}
+.main-slider-caption h1 { color:#ffffff;}
+.main-slider-caption p { color:#ffffff;}
+.site-footer { background-color:#2d3142;}
+.site-footer, .site-footer a { color:#4f5d75;}
+body { color:#4f5d75;}
+body { font-family:Open Sans;}
+h1,h2,h3,h4,h5,h6,.site-title { font-family:Noto Sans;}
+.site-title { font-size:36px; }
+.site-description { font-size:16px; }
+body { font-size:16px; }
+.main-navigation li { font-size:13px; }
+.so-panel .widget-title { font-size:30px; }
+.post-item .post-content .entry-title { font-size:18px; }
+.single .entry-header .entry-title { font-size:36px; }
+.widget-area .widget-title span { font-size:18px; }
+
+</style>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans%3A400%2C400italic%2C600%2C600italic%7CNoto+Sans%3A400%2C400italic%2C600%2C600italic&amp;subset=latin%2Clatin-ext%2Ccyrillic" id="talon-fonts-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="http://deeplearningbook.com.br/wp-content/themes/talon/icons/icons.min.css?ver=1" id="talon-icons-css" media="all" rel="stylesheet" type="text/css"/>
+<!-- Inline jetpack_facebook_likebox -->
+<style id="jetpack_facebook_likebox-inline-css" type="text/css">
+.widget_facebook_likebox {
+	overflow: hidden;
+}
+
+</style>
+<link href="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1" id="social-logos-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="http://deeplearningbook.com.br/wp-content/plugins/jetpack/css/jetpack.css?ver=7.3.1" id="jetpack_css-css" media="all" rel="stylesheet" type="text/css"/>
+<script src="http://deeplearningbook.com.br/wp-includes/js/jquery/jquery.js?ver=1.12.4" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1" type="text/javascript"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/build/related-posts/related-posts.min.js?ver=20190204" type="text/javascript"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,exe,js,pdf,ppt,tgz,zip,xls","inbound_paths":"[]","home_url":"http:\/\/deeplearningbook.com.br","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/google-analytics-for-wordpress/assets/js/frontend.min.js?ver=7.6.0" type="text/javascript"></script>
+<link href="http://deeplearningbook.com.br/wp-json/" rel="https://api.w.org/"/>
+<link href="http://deeplearningbook.com.br/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+<link href="http://deeplearningbook.com.br/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+<link href="https://wp.me/p9uUnD-jf" rel="shortlink"/>
+<link href="http://deeplearningbook.com.br/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fdeeplearningbook.com.br%2Freconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2%2F" rel="alternate" type="application/json+oembed"/>
+<link href="http://deeplearningbook.com.br/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fdeeplearningbook.com.br%2Freconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2%2F&amp;format=xml" rel="alternate" type="text/xml+oembed"/>
+<script type="text/javascript">
+(function(url){
+	if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+	var addEvent = function(evt, handler) {
+		if (window.addEventListener) {
+			document.addEventListener(evt, handler, false);
+		} else if (window.attachEvent) {
+			document.attachEvent('on' + evt, handler);
+		}
+	};
+	var removeEvent = function(evt, handler) {
+		if (window.removeEventListener) {
+			document.removeEventListener(evt, handler, false);
+		} else if (window.detachEvent) {
+			document.detachEvent('on' + evt, handler);
+		}
+	};
+	var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+	var logHuman = function() {
+		if (window.wfLogHumanRan) { return; }
+		window.wfLogHumanRan = true;
+		var wfscr = document.createElement('script');
+		wfscr.type = 'text/javascript';
+		wfscr.async = true;
+		wfscr.src = url + '&r=' + Math.random();
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+		for (var i = 0; i < evts.length; i++) {
+			removeEvent(evts[i], logHuman);
+		}
+	};
+	for (var i = 0; i < evts.length; i++) {
+		addEvent(evts[i], logHuman);
+	}
+})('//deeplearningbook.com.br/?wordfence_lh=1&hid=6EFFB7B5F81676A34EA3250B1DD92264');
+</script><style>/* CSS added by WP Meta and Date Remover*/.entry-meta {display:none !important;}
+	.home .entry-meta { display: none; }
+	.entry-footer {display:none !important;}
+	.home .entry-footer { display: none; }</style>
+<link href="//v0.wordpress.com" rel="dns-prefetch"/>
+<link href="//widgets.wp.com" rel="dns-prefetch"/>
+<link href="//s0.wp.com" rel="dns-prefetch"/>
+<link href="//0.gravatar.com" rel="dns-prefetch"/>
+<link href="//1.gravatar.com" rel="dns-prefetch"/>
+<link href="//2.gravatar.com" rel="dns-prefetch"/>
+<link href="//i0.wp.com" rel="dns-prefetch"/>
+<link href="//i1.wp.com" rel="dns-prefetch"/>
+<link href="//i2.wp.com" rel="dns-prefetch"/>
+<style type="text/css">img#wpstats{display:none}</style></link></meta></link></meta></head>
+<body class="post-template-default single single-post postid-1193 single-format-standard">
+<div off-canvas="main-menu left shift">
+<div class="mobile-branding">
+<div class="site-branding">
+<p class="site-title"><a href="http://deeplearningbook.com.br/" rel="home">Deep Learning Book</a></p>
+<p class="site-description">Em Português, Online e Gratuito</p>
+</div>
+</div>
+<div class="menu-menu1-container"><ul class="mobile-menu" id="mobile-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-14" id="menu-item-14"><a href="http://deeplearningbook.com.br/">Início</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-13" id="menu-item-13"><a href="http://deeplearningbook.com.br/capitulos/">Capítulos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22" id="menu-item-22"><a href="http://deeplearningbook.com.br/cursos-online/">Cursos Online</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12" id="menu-item-12"><a href="http://deeplearningbook.com.br/contato/">Contato</a></li>
+</ul></div> </div>
+<div canvas="container" class="site" id="page">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<header class="site-header header-sticky" id="header">
+<div class="main-header">
+<div class="container">
+<div class="row">
+
+<div class="col-md-8 menu-container">
+<nav class="main-navigation" id="site-navigation" role="navigation">
+<div class="menu-menu1-container"><ul class="menu" id="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-14"><a href="http://deeplearningbook.com.br/">Início</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-13"><a href="http://deeplearningbook.com.br/capitulos/">Capítulos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22"><a href="http://deeplearningbook.com.br/cursos-online/">Cursos Online</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12"><a href="http://deeplearningbook.com.br/contato/">Contato</a></li>
+</ul></div> </nav>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="site-content" id="content">
+<div class="container">
+<div class="row">
+<div class="content-area col-md-8" id="primary">
+<main class="site-main" id="main" role="main">
+<article class="post-1193 post type-post status-publish format-standard has-post-thumbnail hentry category-livro-online tag-reconhecimento-de-imagens tag-rede-neural-convolucional post-item clearfix" id="post-1193">
+<header class="entry-header">
+<h1 class="entry-title">Capítulo 45 – Reconhecimento de Imagens com Redes Neurais Convolucionais em Python – Parte 2</h1> <div class="entry-meta">
+<span class="byline"><span class="author vcard"><a class="url fn n" href=""></a></span><span class="meta-dash">–</span></span><span class="cat-links"><a href="http://deeplearningbook.com.br/category/livro-online/" rel="category tag">Livro Online</a></span><span class="meta-dash">–</span><span class="posted-on"><time class="entry-date published" datetime=""></time><time class="updated" datetime=""></time></span> </div><!-- .entry-meta -->
+</header><!-- .entry-header -->
+<div class="single-thumb">
+<a href="http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/" title="Capítulo 45 – Reconhecimento de Imagens com Redes Neurais Convolucionais em Python – Parte 2"><img alt="Deep Learning Book" class="attachment-talon-blog-image size-talon-blog-image wp-post-image" data-attachment-id="113" data-comments-opened="0" data-image-description="" data-image-meta='{"aperture":"0","credit":"","camera":"","caption":"","created_timestamp":"0","copyright":"","focal_length":"0","iso":"0","shutter_speed":"0","title":"","orientation":"0"}' data-image-title="Deep Learning Book" data-large-file="https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?fit=780%2C360" data-medium-file="https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?fit=300%2C138" data-orig-file="https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?fit=780%2C360" data-orig-size="780,360" data-permalink="http://deeplearningbook.com.br/deep-learning-book/deep-learning-book/" height="318" sizes="(max-width: 690px) 100vw, 690px" src="https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?fit=690%2C318" srcset="https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?w=780 780w, https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?resize=300%2C138 300w, https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?resize=768%2C354 768w, https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?resize=200%2C92 200w, https://i0.wp.com/deeplearningbook.com.br/wp-content/uploads/2018/01/deep-learning-book.jpg?resize=690%2C318 690w" width="690"/></a>
+</div>
+<div class="entry-content">
+<p style="text-align: justify;"><span style="color: #000000;">Vamos iniciar nosso trabalho de Reconhecimento de Imagens com Redes Neurais Convolucionais em Python cuidando da nossa matéria-prima: dados. Precisamos fazer o download das imagens e organizá-las para então iniciar o trabalho.</span></p>
+<p style="text-align: justify;"><span style="color: #000000;">Usaremos como fonte de dados, o famoso dataset <span style="text-decoration: underline;"><a href="https://www.kaggle.com/c/dogs-vs-cats/data" rel="noopener noreferrer" target="_blank">Dogs and Cats</a></span> oferecido pelo Kaggle, o portal sobre Competições de Data Science, onde inclusive a Data Science Academy promove entre os alunos matriculados nas Formações as Competições DSA de Machine Learning. O Kaggle oferece diversos datasets públicos que podem ser usados para você desenvolver seus projetos e incluir no seu portfólio, uma excelente forma de demonstrar suas habilidades em Data Science e Machine Learning. Mostramos como construir um portfólio de projetos de Data Science aqui: <span style="text-decoration: underline;"><a href="https://www.datascienceacademy.com.br/course?courseid=preparao-para-carreira-de-cientista-de-dados" rel="noopener noreferrer" target="_blank">Preparação Para Carreira de Cientista de Dados</a></span>.</span></p>
+<p style="text-align: justify;"><span style="color: #000000;">Você pode fazer o download das imagens neste endereço: <span style="text-decoration: underline;"><a href="https://www.kaggle.com/c/dogs-vs-cats/data" rel="noopener noreferrer" target="_blank">Dogs vs. Cats</a></span>. Mas nós já fizemos o download e disponibilizamos para você junto com o Jupyter Notebook no repositório deste livro no <span style="text-decoration: underline;"><a href="https://github.com/dsacademybr/DeepLearningBook" rel="noopener noreferrer" target="_blank">Github</a></span>. Como este dataset é bastante famoso, alternativamente, você pode fazer o download oferecido pela Microsoft Research neste endereço <span style="text-decoration: underline;"><a href="https://www.microsoft.com/en-us/download/details.aspx?id=54765" rel="noopener noreferrer" target="_blank">Kaggle Cats and Dogs Dataset</a></span>.</span></p>
+<p style="text-align: justify;"><span style="color: #000000;">Feito o download das imagens (você vai precisar de aproximadamente 1 GB de espaço em disco para as imagens), precisamos organizar os arquivos em uma estrutura de diretórios da seguinte forma:</span></p>
+<p> </p>
+<p style="text-align: justify;"><span style="color: #000000;"><img alt="diretorios" class="aligncenter size-full wp-image-1198" data-attachment-id="1198" data-comments-opened="0" data-image-description="" data-image-meta='{"aperture":"0","credit":"","camera":"","caption":"","created_timestamp":"0","copyright":"","focal_length":"0","iso":"0","shutter_speed":"0","title":"","orientation":"0"}' data-image-title="diretorios" data-large-file="https://i1.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/diretorios.png?fit=570%2C222" data-medium-file="https://i1.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/diretorios.png?fit=300%2C117" data-orig-file="https://i1.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/diretorios.png?fit=570%2C222" data-orig-size="570,222" data-permalink="http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/diretorios/" data-recalc-dims="1" height="222" sizes="(max-width: 570px) 100vw, 570px" src="https://i1.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/diretorios.png?resize=570%2C222" srcset="https://i1.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/diretorios.png?w=570 570w, https://i1.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/diretorios.png?resize=300%2C117 300w, https://i1.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/diretorios.png?resize=200%2C78 200w" width="570"/></span></p>
+<p> </p>
+<p style="text-align: justify;"><span style="color: #000000;">Crie um diretório (por exemplo Cap45, mas pode ser o nome que você quiser). Dentro dele crie mais 3 pastas: dataset_treino, dataset_validation e dataset_teste. Não use espaços no nome e muito menos acentos nas palavras, pois isso causa diversos problemas em programação.</span></p>
+<p style="text-align: justify;"><span style="color: #000000;">Dentro da pasta dataset_treino, crie mais duas pastas, cats (que vai receber as 12.500 imagens de gatos) e dogs (que vai receber as 12.500 imagens de cachorros). </span></p>
+<p style="text-align: justify;"><span style="color: #000000;">Nas pastas dataset_validation e dataset_teste não é necessário criar sub pastas e dentro delas colocaremos as 12.500 imagens de validação e 1.000 imagens de teste, respectivamente. As imagens de validação serão usadas para avaliar o modelo durante o treinamento e as imagens de teste serão usadas para avaliar o modelo depois do treinamento.</span></p>
+<p style="text-align: justify;"><span style="color: #000000;">Podemos agora visualizar algumas imagens usando o Jupyter Notebook, que você encontra no repositório deste livro no <span style="text-decoration: underline;"><a href="https://github.com/dsacademybr/DeepLearningBook" rel="noopener noreferrer" target="_blank">Github</a></span>. Caso não tenha familiaridade com o Jupyter Notebook, acesse o Capítulo 1 do curso gratuito <span style="text-decoration: underline;"><a href="https://www.datascienceacademy.com.br/course?courseid=python-fundamentos" rel="noopener noreferrer" target="_blank">Python Fundamentos Para Análise de Dados</a></span>.</span></p>
+<p style="text-align: justify;"><span style="color: #000000;">Se você criou a estrutura de diretórios de forma correta, então as seguintes células mostrarão algumas das imagens:</span></p>
+<p><img alt="image1" class="aligncenter wp-image-1203 size-large" data-attachment-id="1203" data-comments-opened="0" data-image-description="" data-image-meta='{"aperture":"0","credit":"","camera":"","caption":"","created_timestamp":"0","copyright":"","focal_length":"0","iso":"0","shutter_speed":"0","title":"","orientation":"0"}' data-image-title="image1" data-large-file="https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image1.png?fit=1024%2C851" data-medium-file="https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image1.png?fit=300%2C249" data-orig-file="https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image1.png?fit=1056%2C878" data-orig-size="1056,878" data-permalink="http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/image1-5/" data-recalc-dims="1" height="851" sizes="(max-width: 1024px) 100vw, 1024px" src="https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image1.png?resize=1024%2C851" srcset="https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image1.png?resize=1024%2C851 1024w, https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image1.png?resize=300%2C249 300w, https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image1.png?resize=768%2C639 768w, https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image1.png?resize=200%2C166 200w, https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image1.png?resize=690%2C574 690w, https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image1.png?w=1056 1056w" width="1024"/></p>
+<p> </p>
+<p><img alt="image2" class="aligncenter wp-image-1204 size-large" data-attachment-id="1204" data-comments-opened="0" data-image-description="" data-image-meta='{"aperture":"0","credit":"","camera":"","caption":"","created_timestamp":"0","copyright":"","focal_length":"0","iso":"0","shutter_speed":"0","title":"","orientation":"0"}' data-image-title="image2" data-large-file="https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image2.png?fit=951%2C1024" data-medium-file="https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image2.png?fit=279%2C300" data-orig-file="https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image2.png?fit=1012%2C1090" data-orig-size="1012,1090" data-permalink="http://deeplearningbook.com.br/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2/image2-5/" data-recalc-dims="1" height="1024" sizes="(max-width: 951px) 100vw, 951px" src="https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image2.png?resize=951%2C1024" srcset="https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image2.png?resize=951%2C1024 951w, https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image2.png?resize=279%2C300 279w, https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image2.png?resize=768%2C827 768w, https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image2.png?resize=200%2C215 200w, https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image2.png?resize=690%2C743 690w, https://i2.wp.com/deeplearningbook.com.br/wp-content/uploads/2019/05/image2.png?w=1012 1012w" width="951"/></p>
+<p> </p>
+<p style="text-align: justify;"><span style="color: #000000;">Se as imagens foram mostradas de forma correta, então os dados estão prontos para serem explorados. É o que faremos no próximo capítulo! Até lá.</span></p>
+<p> </p>
+<p><span style="color: #000000;">Referências:</span></p>
+<p><span style="text-decoration: underline;"><a href="http://datascienceacademy.com.br/blog/o-que-e-visao-computacional/" rel="noopener noreferrer" target="_blank">O Que é Visão Computacional?</a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://www.datascienceacademy.com.br/pages/formacao-inteligencia-artificial" rel="noopener noreferrer" target="_blank">Formação Inteligência Artificial</a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://www.datascienceacademy.com.br/pages/formacao-analise-estatistica-para-cientistas-de-dados" rel="noopener noreferrer" target="_blank">Formação Análise Estatística Para Cientistas de Dados</a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://www.datascienceacademy.com.br/pages/formacao-cientista-de-dados" rel="noopener noreferrer" target="_blank">Formação Cientista de Dados</a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://arxiv.org/pdf/1711.00489.pdf" rel="noopener noreferrer" target="_blank">Don’t Decay the Learning Rate, Increase the Batch Size</a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://arxiv.org/pdf/1705.08741.pdf" rel="noopener noreferrer" target="_blank">Train longer, generalize better: closing the generalization gap in large batch training of neural networks</a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://arxiv.org/pdf/1206.5533v2.pdf" rel="noopener noreferrer" target="_blank">Practical Recommendations for Gradient-Based Training of Deep Architectures</a></span></p>
+<p><span style="text-decoration: underline;"><a href="http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf" rel="noopener noreferrer" target="_blank">Gradient-Based Learning Applied to Document Recognition</a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53" rel="noopener noreferrer" target="_blank">A Comprehensive Guide to Convolutional Neural Networks </a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://ayearofai.com/rohan-lenny-1-neural-networks-the-backpropagation-algorithm-explained-abf4609d4f9d" rel="noopener noreferrer" target="_blank">Neural Networks &amp; The Backpropagation Algorithm, Explained</a></span></p>
+<p><span style="text-decoration: underline;"><a href="http://neuralnetworksanddeeplearning.com/" rel="noopener noreferrer" target="_blank">Neural Networks and Deep Learning</a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://www.amazon.com.br/Machine-Learning-Tom-M-Mitchell/dp/0070428077/ref=sr_1_fkmr0_1?ie=UTF8&amp;qid=1482129989&amp;sr=8-1-fkmr0&amp;keywords=Machine+Learning+%28McGraw-Hill+International+Editions+Computer+Science+Series%29" rel="noopener noreferrer" target="_blank">Machine Learning</a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://www.amazon.com.br/Elements-Statistical-Learning-Prediction-Statistics-ebook/dp/B00475AS2E/ref=sr_1_1?ie=UTF8&amp;qid=1482130176&amp;sr=8-1&amp;keywords=The+Elements+of+Statistical+Learning%3A+Data+Mining%2C+Inference%2C+and+Prediction%2C+Second+Edition" rel="noopener noreferrer" target="_blank">The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition</a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://machinelearningmastery.com/gradient-descent-for-machine-learning/" rel="noopener noreferrer" target="_blank">Gradient Descent For Machine Learning</a></span></p>
+<p><span style="text-decoration: underline;"><a href="https://www.amazon.com.br/Pattern-Recognition-Machine-Learning-Christopher/dp/0387310738/ref=sr_1_1?ie=UTF8&amp;qid=1482130309&amp;sr=8-1&amp;keywords=Pattern+Recognition+and+Machine+Learning" rel="noopener noreferrer" target="_blank">Pattern Recognition and Machine Learning</a></span></p>
+<p style="text-align: justify;">
+<div class="sharedaddy sd-sharing-enabled"></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded" data-name="like-post-frame-140353593-1193-5cef9d1540bd1" data-src="https://widgets.wp.com/likes/#blog_id=140353593&amp;post_id=1193&amp;origin=deeplearningbook.com.br&amp;obj_id=140353593-1193-5cef9d1540bd1" id="like-post-wrapper-140353593-1193-5cef9d1540bd1"><h3 class="sd-title">Curtir isso:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px;"><span class="button"><span>Curtir</span></span> <span class="loading">Carregando...</span></div><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+ </p></div><!-- .entry-content -->
+<footer class="entry-footer">
+<span class="tags-links">Tags <a href="http://deeplearningbook.com.br/tag/reconhecimento-de-imagens/" rel="tag">Reconhecimento de Imagens</a> <a href="http://deeplearningbook.com.br/tag/rede-neural-convolucional/" rel="tag">Rede Neural Convolucional</a></span> </footer><!-- .entry-footer -->
+</article><!-- #post-## -->
+
+</main><!-- #main -->
+</div><!-- #primary -->
+<!-- #secondary -->
+</div>
+</div>
+</div><!-- #content -->
+<!-- #colophon -->
+</div><!-- #page -->
+<div style="display:none">
+</div>
+<script>
+			// List of Themes, Classes and Regular expressions
+		var template_name = 'talon';
+		switch(template_name) {
+			case 'twentyeleven' :
+					var classes = ['entry-meta'];
+					var regex = ' by <a(.*?)\/a>;<span class="sep"> by <\/span>';
+					break;
+			case 'twentyten' :
+					var classes = ['entry-meta'];
+					var regex = ' by <a(.*?)\/a>;<span class="meta-sep">by<\/span>';
+					break;
+			case 'object' :
+					var classes = ['post-details', 'post'];
+					var regex = ' by <span(.*?)\/span>;<p class="post-details">by';
+					break;
+			case 'theme-revenge' :
+					var classes = ['post-entry-meta'];
+					var regex = 'By <a(.*?)\/a> on';
+					break;
+			case 'Magnificent' :
+					var classes = ['meta-info'];
+					var regex = '<span>by<\/span> <a(.*?)\/a>;Posted by <a(.*?)\/a> on ';
+					break;
+			case 'wp-clearphoto' :
+					var classes = ['meta'];
+					var regex = '\\|\\s*<\/span>\\s*<span class="meta-author">\\s*<a(.*?)\/a>';
+					break;
+			case 'wp-clearphoto1' :
+					var classes = ['meta'];
+					var regex = '\\|\\s*<\/span>\\s*<span class="meta-author">\\s*<a(.*?)\/a>';
+					break;
+			default:
+					var classes = ['entry-meta'];
+					var regex = ' by <a(.*?)\/a>;<span class="sep"> by <\/span>; <span class="meta-sep">by<\/span>;<span class="meta-sep"> by <\/span>';
+		}
+				if (typeof classes[0] !== 'undefined' && classes[0] !== null) {
+				for(var i = 0; i < classes.length; i++) {
+					var elements = document.querySelectorAll('.'+classes[i]);
+					for (var j = 0; j < elements.length; j++) {
+						var regex_array = regex.split(";");
+						for(var k = 0; k < regex_array.length; k++) {
+							 if (elements[j].innerHTML.match(new RegExp(regex_array[k], "i"))) {
+								 var replaced_txt = elements[j].innerHTML.replace(new RegExp(regex_array[k], "i"), '');
+								 elements[j].innerHTML = replaced_txt;
+							 }
+						}
+					}			
+				}
+			}
+						
+		</script>
+<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/deeplearningbook.com.br\/reconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2\/":1193};
+	</script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/build/photon/photon.min.js?ver=20190201" type="text/javascript"></script>
+<script src="https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201922" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-content/themes/talon/js/skip-link-focus-fix.js?ver=20151215" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-content/themes/talon/js/scripts.min.js?ver=d5f7d703b095c6af6d0c6020c5e6b8a2" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-content/themes/talon/js/main.js?ver=d5f7d703b095c6af6d0c6020c5e6b8a2" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-includes/js/imagesloaded.min.js?ver=3.2.0" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-includes/js/masonry.min.js?ver=3.3.2" type="text/javascript"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://deeplearningbook.com.br/wp-content/themes/talon/js/html5shiv.js?ver=d5f7d703b095c6af6d0c6020c5e6b8a2'></script>
+<![endif]-->
+<script type="text/javascript">
+/* <![CDATA[ */
+var jpfbembed = {"appid":"249643311490","locale":"pt_BR"};
+/* ]]> */
+</script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/build/facebook-embed.min.js" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/build/twitter-timeline.min.js?ver=4.0.0" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-includes/js/wp-embed.min.js?ver=d5f7d703b095c6af6d0c6020c5e6b8a2" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/build/spin.min.js?ver=1.3" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/build/jquery.spin.min.js?ver=1.3" type="text/javascript"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"pt","ajaxurl":"http:\/\/deeplearningbook.com.br\/wp-admin\/admin-ajax.php","nonce":"d32b55a043","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Coment\u00e1rio","post_comment":"Publicar coment\u00e1rio","write_comment":"Escreva um Coment\u00e1rio","loading_comments":"Carregando coment\u00e1rios...","download_original":"Visualizar tamanho original <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Certifique-se de enviar algum texto com o seu coment\u00e1rio.","no_comment_email":"Informe um endere\u00e7o de e-mail para comentar.","no_comment_author":"Forne\u00e7a seu nome para comentar.","comment_post_error":"Desculpe, mas ocorreu um erro ao postar seu coment\u00e1rio. Tente novamente mais tarde.","comment_approved":"Seu coment\u00e1rio foi aprovado.","comment_unapproved":"Seu coment\u00e1rio est\u00e1 aguardando modera\u00e7\u00e3o.","camera":"C\u00e2mera","aperture":"Abertura","shutter_speed":"Velocidade do Obturador","focal_length":"Comprimento Focal","copyright":"Direito autoral","comment_registration":"1","require_name_email":"1","login_url":"http:\/\/deeplearningbook.com.br\/wp-login.php?redirect_to=http%3A%2F%2Fdeeplearningbook.com.br%2Freconhecimento-de-imagens-com-redes-neurais-convolucionais-em-python-parte-2%2F","blog_id":"1","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<p id=\"jp-carousel-commenting-as\">Voc\u00ea precisa <a href=\"#\" class=\"jp-carousel-comment-login\">fazer login<\/a> para comentar.<\/p>"};
+/* ]]> */
+</script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/build/carousel/jetpack-carousel.min.js?ver=20190102" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/build/postmessage.min.js?ver=7.3.1" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/build/jquery.jetpack-resize.min.js?ver=7.3.1" type="text/javascript"></script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/build/likes/queuehandler.min.js?ver=7.3.1" type="text/javascript"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */
+</script>
+<script src="http://deeplearningbook.com.br/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=7.3.1" type="text/javascript"></script>
+<script type="text/javascript">
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-linkedin', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-tumblr', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+</script>
+<iframe id="likes-master" name="likes-master" scrolling="no" src="https://widgets.wp.com/likes/master.html?ver=201922#ver=201922&amp;lang=pt-br" style="display:none;"></iframe>
+<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> blogueiros gostam disto:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+<script async="async" defer="defer" src="https://stats.wp.com/e-201922.js" type="text/javascript"></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:7.3.1',blog:'140353593',post:'1193',tz:'-3',srv:'deeplearningbook.com.br'} ]);
+	_stq.push([ 'clickTrackerInit', '140353593', '1193' ]);
+</script>
+</body>
+</html>
