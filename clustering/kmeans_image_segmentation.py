@@ -1,13 +1,18 @@
 import sys
+import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.clustering import KMeans
+from sklearn.cluster import KMeans
+from PIL import Image
 
 def image_segmentation(image_url, n_clusters, save = True):
-	img_array = plt.imread(image_url)
+	img = Image.open(image_url)
+	img_array = np.array(img.convert("RGB"))
+	#img_array = plt.imread(image_url)
 	img_width = img_array.shape[0]
 	img_height = img_array.shape[1]
-	train = img_array.reshape(img_width * img_height, 3)
-
+	print(img_array.shape)
+	train = img_array.reshape(img_width * img_height, img_array.shape[2])
+	print(train.shape)
 	kmeans = KMeans(n_clusters = n_clusters)
 	kmeans.fit(train)
 
@@ -16,7 +21,7 @@ def image_segmentation(image_url, n_clusters, save = True):
 	for cluster_index in kmeans.labels_:
 		cluster_img_array.append(kmeans.cluster_centers_[cluster_index])
 
-	new_img_array = np.array(cluster_img_array).reshape(img_width, img_height, 3).astype(int)
+	new_img_array = np.array(cluster_img_array).reshape(img_width, img_height, img_array.shape[2]).astype("uint8")
 
 	fig = plt.figure(figsize = (10,10))
 	ax1 = fig.add_subplot(1, 2, 1)
@@ -39,6 +44,6 @@ if __name__ == "__main__":
 	if len(args) > 2:
 		image_url = args[1]
 		number_clusters = args[2]
-		image_segmentation(image_url, number_cluster)
+		image_segmentation(image_url, int(number_clusters))
 	else:
 		test()
